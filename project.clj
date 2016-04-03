@@ -58,11 +58,11 @@
       :output-dir "target/cljsbuild/public/js/out"
       :externs ["react/externs/react.js"]
       :pretty-print true}}}}
-  
+
   :target-path "target/%s/"
   :profiles
   {:uberjar {:omit-source true
-             
+
               :prep-tasks ["compile" ["cljsbuild" "once"]]
               :cljsbuild
               {:builds
@@ -72,8 +72,8 @@
                  {:optimizations :advanced
                   :pretty-print false
                   :closure-warnings
-                  {:externs-validation :off :non-standard-jsdoc :off}}}}} 
-             
+                  {:externs-validation :off :non-standard-jsdoc :off}}}}}
+
              :aot :all
              :uberjar-name "food.jar"
              :source-paths ["env/prod/clj"]
@@ -93,7 +93,7 @@
                                  [lein-figwheel "0.5.0-6"]
                                  [lein-doo "0.1.6"]
                                  [org.clojure/clojurescript "1.7.228"]]
-                  
+
                    :cljsbuild
                    {:builds
                     {:app
@@ -109,8 +109,8 @@
                       {:output-to "target/test.js"
                        :main "food.doo-runner"
                        :optimizations :whitespace
-                       :pretty-print true}}}} 
-                  
+                       :pretty-print true}}}}
+
                   :figwheel
                   {:http-server-root "public"
                    :nrepl-port 7002
