@@ -1,13 +1,11 @@
 (ns food.pages.food
-  (:require [reagent.core :as r]
+  (:require [reagent.session :as session]
             [food.ajax.food :as ajax]))
 
-(def food-group-data (r/atom {}))
-
-(ajax/get-food-groups food-group-data)
-
 (defn food-group-list []
-  (let [food-groups @food-group-data]
+  (let [food-groups (session/get :food-groups)]
+    (if (or (nil? food-groups) (empty? food-groups))
+      (ajax/get-food-groups))
     [:div.container
      (for [food-group food-groups]
        ^{:key (:id food-group)}
