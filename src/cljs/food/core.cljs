@@ -5,15 +5,16 @@
             [goog.events :as events]
             [goog.history.EventType :as HistoryEventType]
             [markdown.core :refer [md->html]]
-            [food.ajax :refer [load-interceptors!]]
-            [ajax.core :refer [GET POST]])
+            [food.init :refer [load-interceptors!]]
+            [ajax.core :refer [GET POST]]
+            [food.pages.food :as pages])
   (:import goog.History))
 
 (defn nav-link [uri title page collapsed?]
   [:li.nav-item
    {:class (when (= page (session/get :page)) "active")}
    [:a.nav-link
-    {:href uri
+    {:href     uri
      :on-click #(reset! collapsed? true)} title]])
 
 (defn navbar []
@@ -27,7 +28,8 @@
         [:a.navbar-brand {:href "#/"} "food"]
         [:ul.nav.navbar-nav
          [nav-link "#/" "Home" :home collapsed?]
-         [nav-link "#/about" "About" :about collapsed?]]]])))
+         [nav-link "#/about" "About" :about collapsed?]
+         [nav-link "#/food/groups" "Food Groups" :food-groups collapsed?]]]])))
 
 (defn about-page []
   [:div.container
@@ -51,8 +53,9 @@
               {:__html (md->html docs)}}]]])])
 
 (def pages
-  {:home #'home-page
-   :about #'about-page})
+  {:home          #'home-page
+   :about         #'about-page
+   :food-groups   #'pages/food-group-list})
 
 (defn page []
   [(pages (session/get :page))])
@@ -62,21 +65,24 @@
 (secretary/set-config! :prefix "#")
 
 (secretary/defroute "/" []
-  (session/put! :page :home))
+                    (session/put! :page :home))
 
 (secretary/defroute "/about" []
-  (session/put! :page :about))
+                    (session/put! :page :about))
+
+(secretary/defroute "/food/groups" []
+                    (session/put! :page :food-groups))
 
 ;; -------------------------
 ;; History
 ;; must be called after routes have been defined
 (defn hook-browser-navigation! []
   (doto (History.)
-        (events/listen
-          HistoryEventType/NAVIGATE
-          (fn [event]
-              (secretary/dispatch! (.-token event))))
-        (.setEnabled true)))
+    (events/listen
+      HistoryEventType/NAVIGATE
+      (fn [event]
+        (secretary/dispatch! (.-token event))))
+    (.setEnabled true)))
 
 ;; -------------------------
 ;; Initialize app

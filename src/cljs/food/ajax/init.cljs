@@ -1,4 +1,4 @@
-(ns food.ajax
+(ns food.init
   (:require [ajax.core :as ajax]))
 
 (defn default-headers [request]
@@ -16,5 +16,3 @@
          conj
          (ajax/to-interceptor {:name "default headers"
                                :request default-headers})))
-
-
