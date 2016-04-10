@@ -10,9 +10,11 @@
      (for [food-group food-groups]
        ^{:key (:id food-group)}
        [:div.row
-        [:div.col-md-12
+        [:div.col-md-10
          [:a {:href (str "#food/group/" (:id food-group))}
-          [:h2 (:name food-group)]]]])]))
+          [:h2 (:name food-group)]]]
+        [:div.col-md-2
+         [:p (str "(" (:food_count food-group) " total)")]]])]))
 
 (defn food-page []
   (let [food-group-id (session/get :food-group-id)

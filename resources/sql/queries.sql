@@ -1,6 +1,8 @@
 -- :name get-food-groups :? :*
 -- :doc retrieve all food groups
-SELECT * FROM food_group;
+SELECT COUNT(*) AS food_count, fg.id AS id, fg.name AS name FROM food AS f
+JOIN food_group AS fg ON fg.id = f.food_group_id
+GROUP BY fg.id;
 
 -- :name get-food-by-food-group :? :*
 -- :doc retrieve food by food group (with paging)
