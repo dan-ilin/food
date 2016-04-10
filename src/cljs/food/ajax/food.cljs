@@ -20,5 +20,5 @@
 
 (defn get-food-by-group [id page-num]
   (GET (str "/api/food/group/" id) {:handler       (partial handler (keyword (str "food-group-" id "-page-" page-num)))
-                                    :params        (get-page-params page-num)
+                                    :params        (get-page-params (if (nil? page-num) 1 page-num))
                                     :error-handler error-handler}))
