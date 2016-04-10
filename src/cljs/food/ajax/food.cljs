@@ -2,6 +2,11 @@
   (:require [ajax.core :refer [GET POST]]
             [reagent.session :as session]))
 
+(def page-size 50)
+(defn get-page-params [page-num]
+  {:limit  page-size
+   :offset (* page-size page-num)})
+
 (defn handler [key response]
   (.log js/console (str response))
   (session/put! key response))
@@ -13,6 +18,7 @@
   (GET "/api/food/group" {:handler       (partial handler :food-groups)
                           :error-handler error-handler}))
 
-(defn get-food-by-group [id]
-  (GET (str "/api/food/group/" id) {:handler       (partial handler id)
+(defn get-food-by-group [id page-num]
+  (GET (str "/api/food/group/" id) {:handler       (partial handler (keyword (str "food-group-" id "-page-" page-num)))
+                                    :params        (get-page-params page-num)
                                     :error-handler error-handler}))

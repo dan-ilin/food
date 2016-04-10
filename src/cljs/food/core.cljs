@@ -53,9 +53,10 @@
               {:__html (md->html docs)}}]]])])
 
 (def pages
-  {:home          #'home-page
-   :about         #'about-page
-   :food-groups   #'pages/food-group-list})
+  {:home        #'home-page
+   :about       #'about-page
+   :food-groups #'pages/food-group-list
+   :food        #'pages/food-page})
 
 (defn page []
   [(pages (session/get :page))])
@@ -72,6 +73,13 @@
 
 (secretary/defroute "/food/groups" []
                     (session/put! :page :food-groups))
+
+(secretary/defroute "/food/group/:id" [id query-params]
+                    (js/console.log id)
+                    (js/console.log query-params)
+                    (session/put! :page :food)
+                    (session/put! :food-group-id id)
+                    (session/put! :page-num (:page query-params)))
 
 ;; -------------------------
 ;; History
