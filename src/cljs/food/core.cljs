@@ -75,8 +75,6 @@
                     (session/put! :page :food-groups))
 
 (secretary/defroute "/food/group/:id" [id query-params]
-                    (js/console.log id)
-                    (js/console.log query-params)
                     (session/put! :page :food)
                     (session/put! :food-group-id id)
                     (session/put! :page-num (:page query-params)))
