@@ -56,7 +56,8 @@
   {:home        #'home-page
    :about       #'about-page
    :food-groups #'pages/food-group-list
-   :food        #'pages/food-page})
+   :food        #'pages/food-page
+   :nutrition   #'pages/nutrition-page})
 
 (defn page []
   [(pages (session/get :page))])
@@ -79,6 +80,10 @@
                       (session/put! :page :food)
                       (session/put! :food-group-id id)
                       (session/put! :page-num (int (if (nil? page) 1 page)))))
+
+(secretary/defroute "/food/:id/nutrition" [id]
+                    (session/put! :food-id id)
+                    (session/put! :page :nutrition))
 
 ;; -------------------------
 ;; History

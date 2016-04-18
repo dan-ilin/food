@@ -27,10 +27,25 @@
        ^{:key (:id food)}
        [:div.row
         [:div.col-md-12
-         [:h2 (:long_desc food)]]])
+         [:a {:href (str "#food/" (:id food) "/nutrition")}
+          [:h2 (:long_desc food)]]]])
      [:div.row
       [:nav [:ul.pager
              (if (<= 1 page-num)
                [:li.disabled [:a {:href "#"} "Prev"]]
                [:li [:a {:href (str "#food/group/" food-group-id "?page=" (dec page-num))} "Prev"]])
              [:li [:a {:href (str "#food/group/" food-group-id "?page=" (inc page-num))} "Next"]]]]]]))
+
+(defn nutrition-page []
+  (let [food-id (session/get :food-id)
+        nutrition-info (session/get (keyword (str "food-" food-id "-nutrition")))]
+    (if (nil? nutrition-info)
+      (ajax/get-nutrition-by-food food-id))
+    [:div.container
+     (for [nutrient nutrition-info]
+       ^{:key (:id nutrient)}
+       [:div.row
+        [:div.col-md-8
+         [:h3 (:name nutrient)]]
+        [:div.col-md-4
+         [:p (str (:amount nutrient) (:units nutrient))]]])]))

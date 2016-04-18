@@ -11,7 +11,9 @@ ORDER BY id LIMIT :limit OFFSET :offset;
 
 -- :name get-nutrition-by-food :? :*
 -- :doc retrieve nutrition by food
-SELECT * FROM nutrition WHERE food_id = :food_id;
+SELECT u.id AS id, u.name AS name, n.amount AS amount, u.units AS units
+FROM nutrition AS n JOIN nutrient AS u ON u.id = n.nutrient_id
+WHERE food_id = :food_id;
 
 -- :name get-nutrients :? :*
 -- :doc retrieve nutrients
