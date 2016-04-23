@@ -27,17 +27,9 @@
 (defn home-page []
   [:div.container
    [:div.jumbotron
-    [:h1 "Welcome to food"]
-    [:p "Time to start building your site!"]
-    [:p [:a.btn.btn-primary.btn-lg {:href "http://luminusweb.net"} "Learn more »"]]]
-   [:div.row
-    [:div.col-md-12
-     [:h2 "Welcome to ClojureScript"]]]
-   (when-let [docs (session/get :docs)]
-     [:div.row
-      [:div.col-md-12
-       [:div {:dangerouslySetInnerHTML
-              {:__html (md->html docs)}}]]])])
+    [:h1 "Nutrition Explorer"]
+    [:p "Use this web app to explore nutrition data for all of your favorite foods, broken down by food group."]
+    [:p [:a.btn.btn-primary.btn-lg {:href "#/food/groups"} "Click here to start »"]]]])
 
 (defn about-page []
   [:div.container
