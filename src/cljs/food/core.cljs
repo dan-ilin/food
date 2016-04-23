@@ -4,10 +4,10 @@
             [secretary.core :as secretary :include-macros true]
             [goog.events :as events]
             [goog.history.EventType :as HistoryEventType]
-            [markdown.core :refer [md->html]]
             [food.init :refer [load-interceptors!]]
             [ajax.core :refer [GET POST]]
-            [food.pages.food :as pages])
+            [food.pages.main :as main-pages]
+            [food.pages.food :as food-pages])
   (:import goog.History))
 
 (defn nav-link [uri title page collapsed?]
@@ -31,33 +31,12 @@
          [nav-link "#/about" "About" :about collapsed?]
          [nav-link "#/food/groups" "Food Groups" :food-groups collapsed?]]]])))
 
-(defn about-page []
-  [:div.container
-   [:div.row
-    [:div.col-md-12
-     "this is the story of food... work in progress"]]])
-
-(defn home-page []
-  [:div.container
-   [:div.jumbotron
-    [:h1 "Welcome to food"]
-    [:p "Time to start building your site!"]
-    [:p [:a.btn.btn-primary.btn-lg {:href "http://luminusweb.net"} "Learn more »"]]]
-   [:div.row
-    [:div.col-md-12
-     [:h2 "Welcome to ClojureScript"]]]
-   (when-let [docs (session/get :docs)]
-     [:div.row
-      [:div.col-md-12
-       [:div {:dangerouslySetInnerHTML
-              {:__html (md->html docs)}}]]])])
-
 (def pages
-  {:home        #'home-page
-   :about       #'about-page
-   :food-groups #'pages/food-group-list
-   :food        #'pages/food-page
-   :nutrition   #'pages/nutrition-page})
+  {:home        #'main-pages/home-page
+   :about       #'main-pages/about-page
+   :food-groups #'food-pages/food-group-list
+   :food        #'food-pages/food-page
+   :nutrition   #'food-pages/nutrition-page})
 
 (defn page []
   [(pages (session/get :page))])
