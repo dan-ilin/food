@@ -31,9 +31,9 @@
           [:h2 (:long_desc food)]]]])
      [:div.row
       [:nav [:ul.pager
-             (if (<= 1 page-num)
-               [:li.disabled [:a {:href "#"} "Prev"]]
-               [:li [:a {:href (str "#food/group/" food-group-id "?page=" (dec page-num))} "Prev"]])
+             (if (< 1 page-num)
+               [:li [:a {:href (str "#food/group/" food-group-id "?page=" (dec page-num))} "Prev"]]
+               [:li.disabled [:a "Prev"]])
              [:li [:a {:href (str "#food/group/" food-group-id "?page=" (inc page-num))} "Next"]]]]]]))
 
 (defn nutrition-page []

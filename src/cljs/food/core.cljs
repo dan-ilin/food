@@ -77,9 +77,9 @@
 
 (secretary/defroute "/food/group/:id" [id query-params]
                     (let [page (:page query-params)]
-                      (session/put! :page :food)
                       (session/put! :food-group-id id)
-                      (session/put! :page-num (int (if (nil? page) 1 page)))))
+                      (session/put! :page-num (if (nil? page) 1 (int page)))
+                      (session/put! :page :food)))
 
 (secretary/defroute "/food/:id/nutrition" [id]
                     (session/put! :food-id id)
