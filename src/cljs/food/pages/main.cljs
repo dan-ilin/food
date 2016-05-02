@@ -21,7 +21,6 @@
         [:a.navbar-brand {:href "#/"} "food"]
         [:ul.nav.navbar-nav
          [nav-link "#/" "Home" :home collapsed?]
-         [nav-link "#/about" "About" :about collapsed?]
          [nav-link "#/food/groups" "Food Groups" :food-groups collapsed?]]]])))
 
 (defn home-page []
@@ -30,9 +29,3 @@
     [:h1 "Nutrition Explorer"]
     [:p "Use this web app to explore nutrition data for all of your favorite foods, broken down by food group."]
     [:p [:a.btn.btn-primary.btn-lg {:href "#/food/groups"} "Click here to start »"]]]])
-
-(defn about-page []
-  [:div.container
-   [:div.row
-    [:div.col-md-12
-     "this is the story of food... work in progress"]]])

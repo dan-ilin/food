@@ -12,7 +12,6 @@
 
 (def pages
   {:home        #'main-pages/home-page
-   :about       #'main-pages/about-page
    :food-groups #'food-pages/food-group-list
    :food        #'food-pages/food-page
    :nutrition   #'food-pages/nutrition-page})
@@ -26,9 +25,6 @@
 
 (secretary/defroute "/" []
                     (session/put! :page :home))
-
-(secretary/defroute "/about" []
-                    (session/put! :page :about))
 
 (secretary/defroute "/food/groups" []
                     (session/put! :page :food-groups))
