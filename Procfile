@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/food.jar clojure.main -m food.core
+web: java $JVM_OPTS -cp target/uberjar/food.jar clojure.main -m food.core
