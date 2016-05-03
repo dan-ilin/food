@@ -45,7 +45,7 @@
      (for [nutrient nutrition-info]
        ^{:key (:id nutrient)}
        [:div.row
-        [:div.col-md-8
+        [:div.col-md-6 {:style {:align "center"}}
          [:h3 (:name nutrient)]]
-        [:div.col-md-4
-         [:p (str (:amount nutrient) (:units nutrient))]]])]))
+        [:div.col-md-6
+         [:p (str (:amount nutrient) " " (:units nutrient))]]])]))
