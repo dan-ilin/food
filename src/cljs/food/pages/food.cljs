@@ -12,7 +12,7 @@
        [:div.row
         [:div.col-md-10
          [:a {:href (str "#food/group/" (:id food-group))}
-          [:h2 (:name food-group)]]]
+          [:p (:name food-group)]]]
         [:div.col-md-2
          [:p (str "(" (:food_count food-group) " total)")]]])]))
 
@@ -28,7 +28,7 @@
        [:div.row
         [:div.col-md-12
          [:a {:href (str "#food/" (:id food) "/nutrition")}
-          [:h2 (:long_desc food)]]]])
+          [:p (:long_desc food)]]]])
      [:div.row
       [:nav [:ul.pager
              (if (< 1 page-num)
@@ -46,6 +46,6 @@
        ^{:key (:id nutrient)}
        [:div.row
         [:div.col-md-6 {:style {:align "center"}}
-         [:h3 (:name nutrient)]]
+         [:p (:name nutrient)]]
         [:div.col-md-6
          [:p (str (:amount nutrient) " " (:units nutrient))]]])]))
