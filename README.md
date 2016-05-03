@@ -4,6 +4,8 @@ generated using Luminus version "2.9.10.27"
 
 Hosted at: https://nutrition-explorer.herokuapp.com/
 
+USDA SR28 data adapted from https://github.com/alyssaq/usda-sqlite
+
 ## Prerequisites
 
 You will need [Leiningen][1] 2.0 or above installed.
